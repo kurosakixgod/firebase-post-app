@@ -1,0 +1,20 @@
+.post {
+	width: 800px;
+	padding: 20px;
+	border-radius: 32px;
+	display: flex;
+	flex-direction: column;
+	align-self: start;
+	background-color: #fff;
+	color: #000;
+	transition: 0.2s all;
+	&:hover {
+		scale: 1.05;
+	}
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+}

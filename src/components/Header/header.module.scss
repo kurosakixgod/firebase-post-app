@@ -1,0 +1,32 @@
+.header {
+	padding: 20px 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	&__navlist {
+		display: flex;
+		gap: 20px;
+		list-style-type: none;
+	}
+	&__btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: white;
+		padding: 5px 15px;
+		border-radius: 8px;
+		transition: 0.2s all;
+		font-size: 20px;
+		cursor: pointer;
+		&:hover {
+			background-color: #424242;
+		}
+	}
+
+	&__authList {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+		font-size: 25px;
+	}
+}

@@ -1,0 +1,27 @@
+.comment {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.like {
+	width: 30px;
+	height: 50%;
+	cursor: pointer;
+	transition: 0.2s all;
+	&:hover {
+		color: red;
+	}
+}
+
+.likes {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}

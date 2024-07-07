@@ -1,0 +1,12 @@
+.comment__list {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 30px;
+	list-style-type: none;
+}
+
+.comment__length {
+	margin-top: 30px;
+	font-size: 30px;
+}
