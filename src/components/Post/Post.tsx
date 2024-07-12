@@ -10,6 +10,7 @@ const Post = ({ description, title, id, creator }: IPost) => {
 	const [deletePost] = useDeletePostMutation();
 
 	const user = useAuth();
+	console.log(id);
 
 	return (
 		<li className={styles.item}>

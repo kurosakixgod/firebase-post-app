@@ -5,24 +5,24 @@ import {
 	collection,
 	getDoc,
 	doc,
-	updateDoc,
 	deleteDoc,
 } from "firebase/firestore";
-import { IComment, IPost } from "../types/posts";
+import { IPost } from "../types/posts";
 
 class PostService {
+	private collectionRef = collection(db, "posts");
+
 	async getPosts() {
-		const data = await getDocs(collection(db, "posts"));
+		const data = await getDocs(this.collectionRef);
 		const posts: IPost[] = [];
 		data.forEach((doc) => {
-			const { title, description, timeCreate, comments, creator } =
-				doc.data();
+			const { title, description, timeCreate, creator } =
+				doc.data() as IPost;
 			const post: IPost = {
 				id: doc.id,
 				description,
 				title,
 				timeCreate,
-				comments,
 				creator,
 			};
 
@@ -33,43 +33,21 @@ class PostService {
 
 	async getSinglePost(id: string) {
 		const data = await getDoc(doc(db, "posts", id));
-		if (data.exists()) {
-			const { title, description, timeCreate, comments, creator } =
-				data.data();
-			const post: IPost = {
-				id: data.id,
-				description,
-				title,
-				timeCreate,
-				comments,
-				creator,
-			};
-			return post;
-		}
+
+		const { title, description, timeCreate, creator } =
+			data.data() as IPost;
+		const post: IPost = {
+			id: data.id,
+			description,
+			title,
+			timeCreate,
+			creator,
+		};
+		return post;
 	}
 
 	async addPost(post: IPost) {
-		await addDoc(collection(db, "posts"), post);
-	}
-
-	async updateComments(comments: IComment[], id: string) {
-		await updateDoc(doc(db, "posts", id), {
-			comments,
-		});
-
-		const post = await this.getSinglePost(id);
-
-		return post;
-	}
-
-	async updateComment(comments: IComment[], id: string) {
-		await updateDoc(doc(db, "posts", id), {
-			comments,
-		});
-
-		const post = await this.getSinglePost(id);
-
-		return post;
+		await addDoc(this.collectionRef, post);
 	}
 
 	async deletePost(id: string) {

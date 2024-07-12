@@ -17,11 +17,17 @@ const PostList = () => {
 		return <h1>Errror</h1>;
 	}
 
+	if (!data?.length) {
+		return <h1>No posts</h1>;
+	}
+
 	return (
-		<ul className={styles.post__list}>
-			{sortedData &&
-				sortedData.map((post) => <Post key={post.id} {...post} />)}
-		</ul>
+		<div>
+			<ul className={styles.post__list}>
+				{sortedData &&
+					sortedData.map((post) => <Post key={post.id} {...post} />)}
+			</ul>
+		</div>
 	);
 };
 

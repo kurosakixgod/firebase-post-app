@@ -1,16 +1,19 @@
-import { useParams } from "react-router-dom";
 import { useGetSinglePostQuery } from "../../api/postApi";
 
 import styles from "./singlePost.module.scss";
 
-const SinglePost = () => {
-	const { id } = useParams();
+interface SinglePostProps {
+	postId: string;
+}
 
-	const { data } = useGetSinglePostQuery(id as string);
+const SinglePost = ({ postId }: SinglePostProps) => {
+	const { data } = useGetSinglePostQuery(postId);
 
 	if (!data) {
 		return <div>Data not found</div>;
 	}
+
+	console.log(postId);
 
 	return (
 		<div className={styles.post}>

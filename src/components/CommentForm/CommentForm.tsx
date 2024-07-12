@@ -1,42 +1,36 @@
 import { Button, Input } from "antd";
 import { Controller, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import {
-	useGetSinglePostQuery,
-	useUpdateCommentsMutation,
-} from "../../api/postApi";
-import { useAuth } from "../../hooks/useAuth";
-import { IComment } from "../../types/posts";
+
+import { IComment } from "../../types/comments";
 import { v4 } from "uuid";
 import styles from "./commentForm.module.scss";
 
-const CommentForm = () => {
-	const { control, handleSubmit, reset } = useForm();
-	const { id } = useParams();
-	const { data } = useGetSinglePostQuery(id as string);
-	const comments = data?.comments;
+import { User } from "firebase/auth";
+import { ISinglePost } from "../../types/posts";
+import { useAddCommentMutation } from "../../api/commentApi";
 
-	const [updateComments] = useUpdateCommentsMutation();
+interface CommentData {
+	commentMessage: string;
+}
 
-	const user = useAuth();
+interface CommentFormProps extends ISinglePost {
+	user: User;
+}
 
-	const onSubmit = async ({ commentMessage }: { commentMessage: string }) => {
-		if (comments) {
-			const newComment: IComment = {
-				userName: user?.email as string,
-				message: commentMessage,
-				id: v4(),
-			};
+const CommentForm = ({ postId, user }: CommentFormProps) => {
+	const { control, handleSubmit, reset } = useForm<CommentData>();
+	const [addComment] = useAddCommentMutation();
 
-			const newComments = [...comments, newComment];
-			const post = await updateComments({
-				comments: newComments,
-				id: id as string,
-			});
-			console.log(post);
+	const onSubmit = async ({ commentMessage }: CommentData) => {
+		const newComment: IComment = {
+			userName: user.email as string,
+			message: commentMessage,
+			postId,
+			id: v4(),
+		};
+		await addComment(newComment);
 
-			reset();
-		}
+		reset();
 	};
 
 	return (

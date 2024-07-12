@@ -5,6 +5,7 @@ import { useAddPostMutation } from "../../api/postApi";
 
 import styles from "./createPostForm.module.scss";
 import { useAuth } from "../../hooks/useAuth";
+import { IPost } from "../../types/posts";
 
 interface PostData {
 	title: string;
@@ -12,17 +13,17 @@ interface PostData {
 }
 
 const CreatePostForm = () => {
-	const { control, handleSubmit, reset } = useForm();
+	const { control, handleSubmit, reset } = useForm<PostData>();
 
 	const [addPost] = useAddPostMutation();
 	const user = useAuth();
 	const onSubmit = async (data: PostData) => {
 		if (user?.email) {
-			const post = {
+			const post: IPost = {
 				id: v4(),
 				...data,
 				timeCreate: Date.now(),
-				comments: [],
+
 				creator: user.email,
 			};
 			reset();

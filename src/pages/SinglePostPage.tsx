@@ -1,9 +1,18 @@
+import { useParams } from "react-router-dom";
 import CommentForm from "../components/CommentForm/CommentForm";
 import { CommentList } from "../components/CommentsList/CommentList";
 import Header from "../components/Header/Header";
 import SinglePost from "../components/SinglePost/SinglePost";
+import { useAuth } from "../hooks/useAuth";
 
 const SinglePostPage = () => {
+	const user = useAuth();
+	const { id: postId } = useParams();
+
+	if (!postId) {
+		return <h2>Post not found</h2>;
+	}
+
 	return (
 		<>
 			<Header />
@@ -14,9 +23,9 @@ const SinglePostPage = () => {
 					margin: "0 auto",
 				}}
 			>
-				<SinglePost />
-				<CommentList />
-				<CommentForm />
+				<SinglePost postId={postId} />
+				<CommentList postId={postId} />
+				{user && <CommentForm postId={postId} user={user} />}
 			</div>
 		</>
 	);

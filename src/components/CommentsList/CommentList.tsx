@@ -1,41 +1,32 @@
 import styles from "./commentList.module.scss";
 import Comment from "../Comment/Comment";
-
 import {
-	useGetSinglePostQuery,
-	useUpdateCommentsMutation,
-} from "../../api/postApi";
-import { useParams } from "react-router-dom";
+	useDeleteCommentMutation,
+	useGetCommentsQuery,
+} from "../../api/commentApi";
 
-export const CommentList = () => {
-	const { id } = useParams();
-	const { data } = useGetSinglePostQuery(id as string);
-	const [updateComments] = useUpdateCommentsMutation();
+import { ISinglePost } from "../../types/posts";
 
-	const comments = data?.comments;
+export const CommentList = ({ postId }: ISinglePost) => {
+	const [deleteComment] = useDeleteCommentMutation();
 
 	const handleDelete = async (commentId: string) => {
-		if (comments) {
-			const newComments = comments.filter(
-				(comment) => comment.id !== commentId,
-			);
-			console.log("deleted");
-
-			await updateComments({ comments: newComments, id: id as string });
-		}
+		await deleteComment({ postId, commentId });
 	};
+
+	const { data } = useGetCommentsQuery(postId);
 
 	return (
 		<div>
 			<div className={styles.comment__length}>
-				Comments: {comments?.length}
+				Comments: {data?.length}
 			</div>
 			<ul className={styles.comment__list}>
-				{comments?.map((item) => (
+				{data?.map((comment) => (
 					<Comment
 						handleDelete={handleDelete}
-						key={item.id}
-						{...item}
+						{...comment}
+						key={comment.id}
 					/>
 				))}
 			</ul>
