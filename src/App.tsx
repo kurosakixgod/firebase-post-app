@@ -4,10 +4,12 @@ import AuthForm from "./components/AuthForm/AuthForm";
 import MainPage from "./pages/MainPage";
 import CreatePostPage from "./pages/CreatePostPage";
 import SinglePostPage from "./pages/SinglePostPage";
+import Header from "./components/Header/Header";
 
 function App() {
 	return (
 		<>
+			<Header />
 			<Routes>
 				<Route path="/auth" element={<AuthForm />} />
 				<Route path="/create-post" element={<CreatePostPage />} />

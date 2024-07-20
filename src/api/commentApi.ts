@@ -57,6 +57,17 @@ export const commentApi = createApi({
 			},
 			invalidatesTags: ["comment"],
 		}),
+		deleteAllComments: builder.mutation<null, string>({
+			queryFn: async (postId) => {
+				try {
+					await CommentsService.deleteAllComments(postId);
+					return { data: null };
+				} catch (error) {
+					return { error };
+				}
+			},
+			invalidatesTags: ["comment"],
+		}),
 	}),
 });
 
@@ -64,4 +75,5 @@ export const {
 	useAddCommentMutation,
 	useGetCommentsQuery,
 	useDeleteCommentMutation,
+	useDeleteAllCommentsMutation,
 } = commentApi;

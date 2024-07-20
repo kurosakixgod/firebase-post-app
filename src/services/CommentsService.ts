@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { IComment } from "../types/comments";
+import LikesService from "./LikesService";
 
 class CommentsService {
 	async getComments(postId: string) {
@@ -41,6 +42,14 @@ class CommentsService {
 			if (comment.id === commentId) {
 				await deleteDoc(doc(db, "comments", comment.id));
 			}
+		}
+	}
+
+	async deleteAllComments(postId: string) {
+		const comments = await this.getComments(postId);
+		for (const comment of comments) {
+			await deleteDoc(doc(db, "comments", comment.id));
+			await LikesService.removeLike(comment.id);
 		}
 	}
 }

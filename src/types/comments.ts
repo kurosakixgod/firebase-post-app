@@ -4,10 +4,3 @@ export interface IComment {
 	message: string;
 	userName: string;
 }
-
-export interface ILike {
-	postId: string;
-	commentId: string;
-	userId: string;
-	id: string;
-}

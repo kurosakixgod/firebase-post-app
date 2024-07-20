@@ -1,12 +1,12 @@
-import Header from "../components/Header/Header";
 import PostList from "../components/PostList/PostList";
+
+import styles from "./pages.module.scss";
 
 const MainPage = () => {
 	return (
-		<>
-			<Header />
+		<main className={styles.page}>
 			<PostList />
-		</>
+		</main>
 	);
 };
 

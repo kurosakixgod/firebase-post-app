@@ -1,6 +1,9 @@
 .create__post__form {
+	display: flex;
+	flex-direction: column;
 	width: 300px;
 	position: fixed;
+	gap: 20px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -9,4 +12,9 @@
 .post__button {
 	width: 200px;
 	margin: 0 auto;
+}
+
+.post__title {
+	text-align: center;
+	color: #fff;
 }

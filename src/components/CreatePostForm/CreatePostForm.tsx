@@ -1,4 +1,4 @@
-import { Button, Form, Input, Flex } from "antd";
+import { Button, Form, Input } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import { v4 } from "uuid";
 import { useAddPostMutation } from "../../api/postApi";
@@ -36,28 +36,27 @@ const CreatePostForm = () => {
 			className={styles.create__post__form}
 			onSubmitCapture={handleSubmit(onSubmit)}
 		>
-			<Flex vertical gap={20}>
-				<Controller
-					name="title"
-					control={control}
-					render={({ field }) => (
-						<Input placeholder="Enter title" {...field} />
-					)}
-				/>
-				<Controller
-					name="description"
-					control={control}
-					render={({ field }) => (
-						<Input.TextArea
-							placeholder="Enter description"
-							{...field}
-						/>
-					)}
-				/>
-				<Button className={styles.post__button} htmlType="submit">
-					Create
-				</Button>
-			</Flex>
+			<h1 className={styles.post__title}>Create a new post</h1>
+			<Controller
+				name="title"
+				control={control}
+				render={({ field }) => (
+					<Input placeholder="Enter title" {...field} />
+				)}
+			/>
+			<Controller
+				name="description"
+				control={control}
+				render={({ field }) => (
+					<Input.TextArea
+						placeholder="Enter description"
+						{...field}
+					/>
+				)}
+			/>
+			<Button className={styles.post__button} htmlType="submit">
+				Create
+			</Button>
 		</Form>
 	);
 };

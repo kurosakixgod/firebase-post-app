@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import CommentForm from "../components/CommentForm/CommentForm";
 import { CommentList } from "../components/CommentsList/CommentList";
-import Header from "../components/Header/Header";
 import SinglePost from "../components/SinglePost/SinglePost";
 import { useAuth } from "../hooks/useAuth";
 
@@ -15,8 +14,6 @@ const SinglePostPage = () => {
 
 	return (
 		<>
-			<Header />
-
 			<div
 				style={{
 					width: "600px",

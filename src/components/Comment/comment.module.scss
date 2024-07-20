@@ -11,12 +11,10 @@
 }
 
 .like {
-	width: 30px;
-	height: 50%;
 	cursor: pointer;
 	transition: 0.2s all;
 	&:hover {
-		color: red;
+		scale: 1.2;
 	}
 }
 
@@ -24,4 +22,12 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+}
+
+.deleteButton {
+	cursor: pointer;
+	transition: 0.2s all;
+	&:hover {
+		scale: 1.2;
+	}
 }

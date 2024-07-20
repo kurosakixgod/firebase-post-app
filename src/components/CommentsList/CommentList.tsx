@@ -6,12 +6,15 @@ import {
 } from "../../api/commentApi";
 
 import { ISinglePost } from "../../types/posts";
+import { useRemoveLikeMutation } from "../../api/likeApit";
 
 export const CommentList = ({ postId }: ISinglePost) => {
 	const [deleteComment] = useDeleteCommentMutation();
+	const [removeLike] = useRemoveLikeMutation();
 
 	const handleDelete = async (commentId: string) => {
 		await deleteComment({ postId, commentId });
+		await removeLike(commentId);
 	};
 
 	const { data } = useGetCommentsQuery(postId);
