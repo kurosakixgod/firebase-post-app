@@ -20,7 +20,7 @@ export const CommentList = ({ postId }: ISinglePost) => {
 	const { data } = useGetCommentsQuery(postId);
 
 	return (
-		<div>
+		<div className={styles.comment__wrapper}>
 			<div className={styles.comment__length}>
 				Comments: {data?.length}
 			</div>

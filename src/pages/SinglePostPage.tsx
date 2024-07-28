@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CommentForm from "../components/CommentForm/CommentForm";
 import { CommentList } from "../components/CommentsList/CommentList";
 import SinglePost from "../components/SinglePost/SinglePost";
 import { useAuth } from "../hooks/useAuth";
+
+import styles from "./pages.module.scss";
 
 const SinglePostPage = () => {
 	const user = useAuth();
@@ -13,18 +15,16 @@ const SinglePostPage = () => {
 	}
 
 	return (
-		<>
-			<div
-				style={{
-					width: "600px",
-					margin: "0 auto",
-				}}
-			>
+		<main className={styles.singlePost}>
+			<div className={styles.post}>
 				<SinglePost postId={postId} />
 				<CommentList postId={postId} />
 				{user && <CommentForm postId={postId} user={user} />}
 			</div>
-		</>
+			<button className={styles.goBackBtn}>
+				<Link to="/">Go back</Link>
+			</button>
+		</main>
 	);
 };
 

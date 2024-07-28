@@ -11,7 +11,6 @@ const Post = ({ description, title, id, creator }: IPost) => {
 	const [deletePost] = useDeletePostMutation();
 	const [deleteAllComments] = useDeleteAllCommentsMutation();
 	const user = useAuth();
-	console.log(id);
 
 	const handleDelete = async (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -23,18 +22,18 @@ const Post = ({ description, title, id, creator }: IPost) => {
 	return (
 		<li className={styles.item}>
 			<Link to={`/${id}`} className={styles.post}>
-				<h2>{title}</h2>
-				<p>
-					{description.length > 90
-						? `${description.slice(0, 90)}...`
-						: description}
-				</p>
-				{user?.email === creator && (
-					<TrashIcon
-						className={styles.deleteButton}
-						onClick={handleDelete}
-					/>
-				)}
+				<div className={styles.titleWrapper}>
+					<h2 className={styles.title}>{title}</h2>
+					{user?.email === creator && (
+						<div>
+							<TrashIcon
+								className={styles.deleteButton}
+								onClick={handleDelete}
+							/>
+						</div>
+					)}
+				</div>
+				<p className={styles.descr}>{description}</p>
 			</Link>
 		</li>
 	);

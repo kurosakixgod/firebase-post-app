@@ -6,6 +6,7 @@ import {
 	getDoc,
 	doc,
 	deleteDoc,
+	updateDoc,
 } from "firebase/firestore";
 import { IPost } from "../types/posts";
 
@@ -52,6 +53,10 @@ class PostService {
 
 	async deletePost(id: string) {
 		await deleteDoc(doc(db, "posts", id));
+	}
+
+	async updatePost(id: string, post: { title: string; description: string }) {
+		await updateDoc(doc(db, "posts", id), post);
 	}
 }
 

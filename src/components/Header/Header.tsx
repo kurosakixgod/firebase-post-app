@@ -29,8 +29,6 @@ const Header = () => {
 			<div className={styles.header__authList}>
 				{user ? (
 					<>
-						<div className={styles.header__btn}>Profile</div>
-
 						<div
 							className={styles.header__btn}
 							onClick={async () => {

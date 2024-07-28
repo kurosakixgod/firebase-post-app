@@ -1,6 +1,12 @@
 .post__list {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 	gap: 30px;
-	list-style-type: none;
+	margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+	.post__list {
+		grid-template-columns: 1fr;
+	}
 }

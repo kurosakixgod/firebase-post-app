@@ -4,9 +4,15 @@
 	align-items: start;
 	gap: 30px;
 	list-style-type: none;
+	width: 50%;
 }
 
 .comment__length {
 	margin-top: 30px;
 	font-size: 30px;
+	color: black;
+}
+
+.comment__wrapper {
+	width: 70%;
 }

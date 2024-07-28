@@ -2,6 +2,14 @@ import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import PostService from "../services/PostService";
 import { IPost } from "../types/posts";
 
+interface UpdatePostArgs {
+	id: string;
+	post: {
+		title: string;
+		description: string;
+	};
+}
+
 export const postApi = createApi({
 	reducerPath: "postApi",
 	baseQuery: fakeBaseQuery(),
@@ -55,6 +63,17 @@ export const postApi = createApi({
 			},
 			invalidatesTags: ["post"],
 		}),
+		updatePost: builder.mutation<null, UpdatePostArgs>({
+			queryFn: async ({ post, id }) => {
+				try {
+					await PostService.updatePost(id, post);
+					return { data: null };
+				} catch (error) {
+					return { error };
+				}
+			},
+			invalidatesTags: ["post"],
+		}),
 	}),
 });
 
@@ -64,4 +83,5 @@ export const {
 	useGetSinglePostQuery,
 	useUpdateCommentsMutation,
 	useDeletePostMutation,
+	useUpdatePostMutation,
 } = postApi;

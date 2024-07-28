@@ -7,7 +7,8 @@
 .text {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	gap: 30px;
+	color: black;
 }
 
 .like {
@@ -22,12 +23,48 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	font-size: 20px;
 }
 
 .deleteButton {
+	display: flex;
+	align-items: center;
 	cursor: pointer;
 	transition: 0.2s all;
 	&:hover {
 		scale: 1.2;
+	}
+}
+
+.commentMessage {
+	color: black;
+}
+
+.commentUserName {
+	font-size: 15px;
+}
+
+.interactive {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+@media (max-width: 450px) {
+	.post {
+		width: 100%;
+	}
+	.text {
+		flex-direction: column;
+		align-items: start;
+		gap: 10px;
+	}
+
+	.interactive {
+		order: 1;
+	}
+
+	.commentUserName {
+		order: 2;
 	}
 }

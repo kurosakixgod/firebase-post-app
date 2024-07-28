@@ -1,6 +1,5 @@
 import styles from "./comment.module.scss";
 import { useAuth } from "../../hooks/useAuth";
-import { Button } from "antd";
 import { IComment } from "../../types/comments";
 import {
 	useCheckLikeQuery,
@@ -29,30 +28,33 @@ const Comment = ({
 	return (
 		<li className={styles.comment}>
 			<div className={styles.text}>
-				<h2>{userName}</h2>
-				<div className={styles.likes}>
-					<div>{likes?.length}</div>
-					<LikeIcon
-						className={styles.like}
-						onClick={() =>
-							likeComment({
-								commentId,
-								userId: user?.uid as string,
-							})
-						}
-						style={{
-							color: data ? "red" : "inherit",
-						}}
-					/>
+				<h2 className={styles.commentUserName}>{userName}</h2>
+				<div className={styles.interactive}>
+					<div className={styles.likes}>
+						<div>{likes?.length}</div>
+						<LikeIcon
+							className={styles.like}
+							onClick={() =>
+								likeComment({
+									commentId,
+									userId: user?.uid as string,
+								})
+							}
+							style={{
+								color: data ? "red" : "inherit",
+							}}
+						/>
+					</div>
+					{user && (
+						<div className={styles.deleteButton}>
+							<TrashIcon
+								onClick={() => handleDelete(commentId)}
+							/>
+						</div>
+					)}
 				</div>
-				{user && (
-					<TrashIcon
-						className={styles.deleteButton}
-						onClick={() => handleDelete(commentId)}
-					/>
-				)}
 			</div>
-			<p>{message}</p>
+			<p className={styles.commentMessage}>{message}</p>
 		</li>
 	);
 };
